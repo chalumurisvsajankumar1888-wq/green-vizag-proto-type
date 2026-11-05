@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#126b45">
+  <title>Green Vizag | Smart Garbage Reporting</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Green Vizag home">
+      <span class="brand-mark">🌿</span>
+      <span><strong>Green Vizag</strong><small>Cleaner streets. Greener future.</small></span>
+    </a>
+    <nav>
+      <button class="nav-link active" data-view="home">Home</button>
+      <button class="nav-link" data-view="report">Report waste</button>
+      <button class="nav-link" data-view="track">Track complaint</button>
+      <button class="nav-link" data-view="about">About</button>
+    </nav>
+    <div class="account-actions" id="accountActions">
+      <button class="btn btn-light" id="loginOpen">Login</button>
+      <button class="btn btn-primary" id="registerOpen">Join us</button>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </header>
+
+  <main>
+    <section class="view active" id="homeView">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">A citizen-powered cleanliness initiative</span>
+          <h1>Let's make <em>Vizag</em><br>cleaner, together.</h1>
+          <p>See garbage? Report it. Follow its progress. Help build a cleaner and healthier city for everyone.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-large" data-go="report">Report garbage <span>→</span></button>
+            <button class="btn btn-outline btn-large" data-go="track">Track a complaint</button>
+          </div>
+          <div class="trust-note"><span class="live-dot"></span> Every report can make a difference</div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a clean green city">
+          <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+          <div class="city-building b1"></div><div class="city-building b2"></div><div class="city-building b3"></div>
+          <div class="tree tree-one">🌳</div><div class="tree tree-two">🌲</div>
+          <div class="clean-bin">♻️</div>
+          <div class="art-label"><b>GREEN VIZAG</b><small>Small actions. Big change.</small></div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Complaint statistics">
+        <article class="stat-card"><span class="stat-icon">📋</span><div><strong id="statTotal">0</strong><small>Total reports</small></div></article>
+        <article class="stat-card"><span class="stat-icon">⏳</span><div><strong id="statPending">0</strong><small>Pending</small></div></article>
+        <article class="stat-card"><span class="stat-icon">🧹</span><div><strong id="statProgress">0</strong><small>In progress</small></div></article>
+        <article class="stat-card"><span class="stat-icon">🌱</span><div><strong id="statResolved">0</strong><small>Resolved</small></div></article>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><span class="eyebrow">How it works</span><h2>Cleaner Vizag starts with you</h2></div><p>Three simple steps to raise an issue in your area.</p></div>
+        <div class="steps-grid">
+          <article class="step-card"><span class="step-number">01</span><div class="step-icon">📸</div><h3>Spot & report</h3><p>Take a photo, describe the waste and add the location.</p></article>
+          <article class="step-card"><span class="step-number">02</span><div class="step-icon">🔎</div><h3>Track progress</h3><p>Use your complaint ID to check the latest status.</p></article>
+          <article class="step-card"><span class="step-number">03</span><div class="step-icon">🌳</div><h3>Keep Vizag clean</h3><p>Stay involved and encourage others to report responsibly.</p></article>
+        </div>
+      </section>
+      <section class="callout"><div><span class="eyebrow">Your neighbourhood matters</span><h2>One report can start a cleaner tomorrow.</h2><p>Help identify waste hotspots across Visakhapatnam.</p></div><button class="btn btn-white" data-go="report">Submit a report →</button></section>
+    </section>
+
+    <section class="view page-view" id="reportView">
+      <div class="page-heading"><span class="eyebrow">Citizen services</span><h1>Report garbage</h1><p>Share a few details so the issue can be identified.</p></div>
+      <div class="form-layout">
+        <form class="panel report-form" id="reportForm">
+          <h2>Complaint details</h2>
+          <div class="form-row">
+            <label>Issue category<select id="category" required><option value="">Select a category</option><option>Overflowing dustbin</option><option>Roadside garbage</option><option>Illegal dumping</option><option>Construction waste</option><option>Plastic waste</option><option>Other</option></select></label>
+            <label>Area / locality<input id="area" required maxlength="90" placeholder="e.g. MVP Colony, Gajuwaka"></label>
+          </div>
+          <label>Exact location / landmark<input id="location" required maxlength="160" placeholder="Street, landmark or nearby building"></label>
+          <label>Description<textarea id="description" required maxlength="500" rows="4" placeholder="Describe the garbage issue..."></textarea><small class="field-hint">Maximum 500 characters.</small></label>
+          <label class="upload-box" for="photo"><span class="upload-icon">📷</span><strong>Add a photograph (optional)</strong><small>JPG, PNG or WEBP · Up to 5 MB</small><input type="file" id="photo" accept="image/png,image/jpeg,image/webp"></label>
+          <div id="photoPreview" class="photo-preview hidden"><img id="previewImage" alt="Selected garbage photograph"><button type="button" id="removePhoto" class="text-button">Remove photo</button></div>
+          <div class="location-tools"><button type="button" class="btn btn-light" id="useLocation">◎ Use my current location</button><span id="geoStatus">Or enter the location manually above.</span></div>
+          <input type="hidden" id="coordinates">
+          <button class="btn btn-primary btn-large full-width" type="submit">Submit complaint <span>→</span></button>
+          <p class="privacy-note">Demo notice: reports are saved only in this browser on this device.</p>
+        </form>
+        <aside class="side-note">
+          <div class="side-icon">💚</div><h3>Before you submit</h3>
+          <ul><li>Provide a clear and accurate location.</li><li>Upload a recent photo if possible.</li><li>Do not include private or sensitive information.</li><li>Submit one report for each separate issue.</li></ul>
+          <div class="tip-box"><b>What happens next?</b><p>Your complaint receives a tracking ID. In this demo, the administrator can update its status from the admin panel.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view page-view" id="trackView">
+      <div class="page-heading"><span class="eyebrow">Complaint updates</span><h1>Track your complaint</h1><p>Enter the complaint ID you received after submitting a report.</p></div>
+      <div class="panel track-panel">
+        <form id="trackForm" class="track-search"><input id="trackId" placeholder="e.g. GV-ABC123" aria-label="Complaint ID" required><button class="btn btn-primary" type="submit">Track report</button></form>
+        <div id="trackResult" class="track-result"><div class="empty-state"><span>🔍</span><h3>Your report updates will appear here</h3><p>Enter a complaint ID above to view its details.</p></div></div>
+      </div>
+    </section>
+
+    <section class="view page-view" id="aboutView">
+      <div class="page-heading"><span class="eyebrow">About the initiative</span><h1>A cleaner city is a shared responsibility.</h1><p>Green Vizag is a student-project concept designed to make local waste reporting simple and transparent.</p></div>
+      <div class="about-grid"><article class="panel"><span class="about-emoji">🌍</span><h2>Our goal</h2><p>Connect citizens and administrators through a simple reporting and tracking experience that encourages responsible waste management.</p></article><article class="panel"><span class="about-emoji">🤝</span><h2>Community first</h2><p>Give residents a convenient way to highlight garbage issues and see how reported complaints progress.</p></article><article class="panel"><span class="about-emoji">💡</span><h2>Built as a prototype</h2><p>This version uses HTML, CSS and JavaScript with browser storage. It is not connected to a municipal authority.</p></article></div>
+    </section>
+
+    <section class="view page-view" id="adminView">
+      <div class="page-heading"><span class="eyebrow">Administration</span><h1>Admin dashboard</h1><p>Review submitted complaints and update their status.</p></div>
+      <div class="admin-toolbar"><div class="admin-tabs"><button class="filter-btn active" data-filter="All">All reports</button><button class="filter-btn" data-filter="Pending">Pending</button><button class="filter-btn" data-filter="In Progress">In progress</button><button class="filter-btn" data-filter="Resolved">Resolved</button></div><button class="btn btn-light" id="adminLogout">Log out</button></div>
+      <div id="adminList" class="admin-list"></div>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand">🌿 <b>Green Vizag</b></div><p>Designed for a cleaner, greener Visakhapatnam.</p><small>Educational prototype · Not an official government service</small></footer>
+
+  <div class="modal6-backdrop hidden" id="authModal">
+    <div class="modal panel">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <span class="eyebrow">Welcome to Green Vizag</span><h2 id="authTitle">Login</h2>
+      <form id="authForm">
+        <div id="nameField" class="hidden"><label>Full name<input id="authName" maxlength="70" placeholder="Your name"></label></div>
+        <label>Email address<input id="authEmail" type="email" required placeholder="you@example.com"></label>
+        <label>Password<input id="authPassword" type="password" required minlength="4" placeholder="At least 4 characters"></label>
+        <button class="btn btn-primary full-width" type="submit" id="authSubmit">Login</button>
+      </form>
+      <p class="switch-auth" id="authSwitch">New here? <button class="text-button" id="switchMode">Create an account</button></p>
+      <p class="demo-admin">Demo admin: admin@greenvizag.demo / GreenVizag123</p>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
